@@ -1,0 +1,945 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Crm.UnifiedServiceDesk.Core</name>
+    </assembly>
+    <members>
+        <member name="M:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.AriaTelemetryLogger.Initialize(System.String,System.String,System.String)">
+            <summary>
+            Initialize aria telemetry logmanager
+            </summary>
+            <param name="orgName">The org url</param>
+        </member>
+        <member name="M:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.AriaTelemetryLogger.ReportEvent(Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDTelemetryEvent[])">
+            <summary>
+            ReportEvent to aria
+            </summary>
+            <param name="eventsToReport">The list of events need to be sent</param>
+        </member>
+        <member name="M:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.AriaTelemetryLogger.Flush">
+            <summary>
+            Flush call to aria to send the pending queued events.
+            https://www.aria.ms/help/faqs/instrumentation/ Q:When/why should I call FlushAndTearDown()? Available as of Jan 4 2019
+            </summary>
+        </member>
+        <member name="T:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.IEventParameter">
+            <summary>
+            Event Parameter interface
+            </summary>
+        </member>
+        <member name="P:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.IEventParameter.ParameterName">
+            <summary>
+            Name of parameter
+            </summary>
+        </member>
+        <member name="P:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.IEventParameter.Value">
+            <summary>
+            Value of parameter
+            </summary>
+        </member>
+        <member name="T:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.EventParameter">
+            <summary>
+            Class definition for event parameter
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.EventParameter.parameterName">
+            <summary>
+            Name of the parameter
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.EventParameter.value">
+            <summary>
+            Value of the parameter
+            </summary>
+        </member>
+        <member name="M:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.EventParameter.#ctor(System.String,System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.EventParameter"/> class.
+            </summary>
+            <param name="parameterName"> Name of the parameter.</param>
+            <param name="value"> Value of the parameter.</param>
+        </member>
+        <member name="P:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.EventParameter.ParameterName">
+            <summary>
+            Get the parameter name
+            </summary>
+        </member>
+        <member name="P:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.EventParameter.Value">
+            <summary>
+            Get the value of the parameter
+            </summary>
+        </member>
+        <member name="T:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.ICrmEvent">
+            <summary>
+            CRM Event interface
+            </summary>
+        </member>
+        <member name="P:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.ICrmEvent.ActivityId">
+            <summary>
+            Id of the activity
+            </summary>
+        </member>
+        <member name="P:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.ICrmEvent.EventName">
+            <summary>
+            Event's name
+            </summary>
+        </member>
+        <member name="P:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.ICrmEvent.EventParameters">
+            <summary>
+            List of parameters
+            </summary>
+        </member>
+        <member name="T:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDBrowserEvent.USDBrowserEventParameters">
+            <summary>
+            The class which contains the names of the event parameters.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDBrowserEvent.USDBrowserEventParameters.BrowserMode">
+            <summary>
+            BrowserMode
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDBrowserEvent.USDBrowserEventParameters.ApplicationName">
+            <summary>
+            Hosted Control ApplicationName
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDBrowserEvent.USDBrowserEventParameters.ApplicationID">
+            <summary>
+            Hosted Control ApplicationID
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDBrowserEvent.USDBrowserEventParameters.ComponentType">
+            <summary>
+            Hosted Control ComponentType
+            </summary>
+        </member>
+        <member name="T:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDCrmEntityPageEvent.USDCrmEntityPageEventParameters">
+            <summary>
+            The class which contains the names of the event parameters.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDCrmEntityPageEvent.USDCrmEntityPageEventParameters.CrmPageEventType">
+            <summary>
+            Navigation Type
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDCrmEntityPageEvent.USDCrmEntityPageEventParameters.ErrorMessage">
+            <summary>
+            Error Message
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDCrmEntityPageEvent.USDCrmEntityPageEventParameters.CorrelationId">
+            <summary>
+            CorrelationId
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDCrmEntityPageEvent.USDCrmEntityPageEventParameters.EntityType">
+            <summary>
+            EntityType
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDCrmEntityPageEvent.USDCrmEntityPageEventParameters.Url">
+            <summary>
+            Navigated Url
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDCrmEntityPageEvent.USDCrmEntityPageEventParameters.EventTimestamp">
+            <summary>
+            Event Timestamp
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDEnvironmentAdditionalInfoEvent.EventParameters.EventContext">
+            <summary>
+            Name of the EventContext parameter
+            </summary>
+        </member>
+        <member name="T:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDExitCodeEvent.CriticalErrorTraceEventParameters">
+            <summary>
+            The class which contains the names of the event parameters.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDExitCodeEvent.CriticalErrorTraceEventParameters.ExitCode">
+            <summary>
+            String representing exitcode of USD
+            </summary>
+        </member>
+        <member name="T:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDFeedbackEvent.USDFeedbackEventParameters">
+            <summary>
+            The class which contains the names of the event parameters.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDFeedbackEvent.USDFeedbackEventParameters.FeedbackMoodType">
+            <summary>
+            Name of the duration parameter
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDFeedbackEvent.USDFeedbackEventParameters.FeedbackMessage">
+            <summary>
+            Name of the boottype parameter
+            </summary>
+        </member>
+        <member name="T:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDActionResultEvent.USDActionResultEventParameters">
+            <summary>
+            The class which contains the names of the event parameters.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDActionResultEvent.USDActionResultEventParameters.Application">
+            <summary>
+            Name of the duration parameter
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDActionResultEvent.USDActionResultEventParameters.ActionName">
+            <summary>
+            Name of the boottype parameter
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDActionResultEvent.USDActionResultEventParameters.HostedControlType">
+            <summary>
+            Name of the boottype parameter
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDActionResultEvent.USDActionResultEventParameters.ActionResult">
+            <summary>
+            Result of the action :
+            Success,
+            ActionFailed (actual failure),
+            ConditionFailed.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDActionResultEvent.USDActionResultEventParameters.ExceptionSource" -->
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDActionResultEvent.USDActionResultEventParameters.ExceptionMethod">
+            <summary>
+            The method that threw the exception
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDActionResultEvent.USDActionResultEventParameters.ExceptionMessage">
+            <summary>
+            The message describing the exception
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDActionResultEvent.USDActionResultEventParameters.ExceptionStackTrace">
+            <summary>
+            String representation of the immediate frames on the call stack
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDActionResultEvent.USDActionResultEventParameters.Duration">
+            <summary>
+            Duration of the action call
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDActionResultEvent.USDActionResultEventParameters.HostingMode">
+            <summary>
+            Hosting Mode of the application - WPF Process / IE Process / Edge Process / Chrome Process
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDActionResultEvent.USDActionResultEventParameters.IsPoolingEnabled">
+            <summary>
+            Boolean parameter that specifies whether Browser Pooling is enabled or not.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDBootPerformanceEvent.BootPerformanceEventParameters">
+            <summary>
+            The class which contains the names of the event parameters.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDBootPerformanceEvent.BootPerformanceEventParameters.Duration">
+            <summary>
+            Name of the duration parameter
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDBootPerformanceEvent.BootPerformanceEventParameters.BootType">
+            <summary>
+            Name of the boottype parameter
+            </summary>
+        </member>
+        <member name="T:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDCriticalErrorTraceEvent.CriticalErrorTraceEventParameters">
+            <summary>
+            The class which contains the names of the event parameters.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDCriticalErrorTraceEvent.CriticalErrorTraceEventParameters.ErrorType">
+            <summary>
+            Critical Errortype indicating fatal or non-fatal
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDCriticalErrorTraceEvent.CriticalErrorTraceEventParameters.TraceMessage">
+            <summary>
+            Name of the tracemessage parameter
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDCriticalErrorTraceEvent.CriticalErrorTraceEventParameters.ErrorStack">
+            <summary>
+            Name of the errorstack parameter
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDCriticalErrorTraceEvent.CriticalErrorTraceEventParameters.ExceptionSource" -->
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDCriticalErrorTraceEvent.CriticalErrorTraceEventParameters.ExceptionMethod">
+            <summary>
+            The method that threw the exception
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDCriticalErrorTraceEvent.CriticalErrorTraceEventParameters.ExceptionMessage">
+            <summary>
+            The message describing the exception
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDCriticalErrorTraceEvent.CriticalErrorTraceEventParameters.ExceptionStackTrace">
+            <summary>
+            String representation of the immediate frames on the call stack
+            </summary>
+        </member>
+        <member name="T:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDEnvironmentInfoEvent.EventParameters">
+            <summary>
+            The class which contains the names of the event parameters for a Environment Info 
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDEnvironmentInfoEvent.EventParameters.WindowsVersion">
+            <summary>
+            Name of the windowsbitness parameter
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDEnvironmentInfoEvent.EventParameters.WindowsBitness">
+            <summary>
+            Name of the windowsbitness parameter
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDEnvironmentInfoEvent.EventParameters.IEVersion">
+            <summary>
+            Name of the ieversion parameter
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDEnvironmentInfoEvent.EventParameters.Processor">
+            <summary>
+            Name of the processor parameter
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDEnvironmentInfoEvent.EventParameters.USDVersion">
+            <summary>
+            Name of the usdversion parameter
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDEnvironmentInfoEvent.EventParameters.Memory">
+            <summary>
+            Name of the ram parameter
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDEnvironmentInfoEvent.EventParameters.ScreenResolution">
+            <summary>
+            Name of the screenresolution parameter
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDEnvironmentInfoEvent.EventParameters.NumberOfMonitors">
+            <summary>
+            Name of the numberofmonitors parameter
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDEnvironmentInfoEvent.EventParameters.EventContext">
+            <summary>
+            Name of the EventContext parameter
+            </summary>
+        </member>
+        <member name="T:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDErrorTraceEvent.ErrorTraceEventParameters">
+            <summary>
+            The class which contains the names of the event parameters.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDErrorTraceEvent.ErrorTraceEventParameters.ExceptionSource">
+            <summary>
+            The name of the application or object that caused the error
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDErrorTraceEvent.ErrorTraceEventParameters.ExceptionMethod">
+            <summary>
+            The method that threw the exception
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDErrorTraceEvent.ErrorTraceEventParameters.ExceptionTime">
+            <summary>
+            Time of the exception
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDErrorTraceEvent.ErrorTraceEventParameters.ExceptionMessage">
+            <summary>
+            The message describing the exception
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDErrorTraceEvent.ErrorTraceEventParameters.ExceptionStackTrace">
+            <summary>
+            String representation of the immediate frames on the call stack
+            </summary>
+        </member>
+        <member name="T:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDFreezeEvent.CriticalErrorTraceEventParameters">
+            <summary>
+            The class which contains the names of the event parameters.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDFreezeEvent.CriticalErrorTraceEventParameters.FreezeReason">
+            <summary>
+            Reason behind USD freeze, IE or non-IE
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDFreezeEvent.CriticalErrorTraceEventParameters.FreezeId">
+            <summary>
+            Freeze Id
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDFreezeEvent.CriticalErrorTraceEventParameters.FreezeDuration">
+            <summary>
+            Duration of USD Freeze captured when it is recoved.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDNPSFeedbackEvent.USDNPSFeedbackEventParameters">
+            <summary>
+            The class which contains the names of the event parameters.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDNPSFeedbackEvent.USDNPSFeedbackEventParameters.Puid">
+            <summary>
+            Object ID from AAD token for the logged in User
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDNPSFeedbackEvent.USDNPSFeedbackEventParameters.ProductVersion">
+            <summary>
+            USD Product Version
+            </summary>
+        </member>
+        <member name="T:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDPerformanceEventV1.USDPerformanceEventV1Parameters">
+            <summary>
+            The class which contains the names of the event parameters.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDPerformanceEventV1.USDPerformanceEventV1Parameters.PerformanceOperationInJSon">
+            <summary>
+            Name of the PerformanceOperationInJSon parameter
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDPerformanceEventV1.USDPerformanceEventV1Parameters.OperationName">
+            <summary>
+            Name of the OperationName parameter
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDPerformanceEventV1.USDPerformanceEventV1Parameters.StartTime">
+            <summary>
+            Name of the StartTime parameter
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDPerformanceEventV1.USDPerformanceEventV1Parameters.EndTime">
+            <summary>
+            Name of the EndTime parameter
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDPerformanceEventV1.USDPerformanceEventV1Parameters.Duration">
+            <summary>
+            Name of the duration parameter
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDPerformanceEventV1.USDPerformanceEventV1Parameters.CompleteLoadTime">
+            <summary>
+            Name of the CompleteLoadTime parameter
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDPerformanceEventV1.USDPerformanceEventV1Parameters.CompleteLoadTimeNavStart">
+            <summary>
+            Name of the CompleteLoadTimeNavStart parameter
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDPerformanceEventV1.USDPerformanceEventV1Parameters.CategoryName">
+            <summary>
+            Name of the CategoryName parameter
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDPerformanceEventV1.USDPerformanceEventV1Parameters.CorrelationId">
+            <summary>
+            Name of the CorrelationId parameter
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDPerformanceEventV1.USDPerformanceEventV1Parameters.FormLoadId">
+            <summary>
+            Name of the FormLoadId parameter
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDPerformanceEventV1.USDPerformanceEventV1Parameters.EventContext">
+            <summary>
+            Name of the EventMessage parameter
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDPerformanceEventV1.USDPerformanceEventV1Parameters.HostingMode">
+            <summary>
+            Hosting Mode of the application - WPF Process / IE Process / Edge Process / Chrome Process
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDPerformanceEventV1.USDPerformanceEventV1Parameters.IsPoolingEnabled">
+            <summary>
+            Boolean parameter that specifies whether Browser Pooling is enabled or not.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDSessionEndEvent.SessionEndEventParameters">
+            <summary>
+            The class which contains the names of the event parameters for a SessionEndEventParameters event
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDSessionEndEvent.SessionEndEventParameters.SessionId">
+            <summary>
+            Name of the sessionid parameter
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDSessionEndEvent.SessionEndEventParameters.TimeStamp">
+            <summary>
+            Name of the timestamp parameter
+            </summary>
+        </member>
+        <member name="T:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDSessionStartEvent.SessionStartEventParameters">
+            <summary>
+            The class which contains the names of the event parameters for a USDSessionStartEvent event
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDSessionStartEvent.SessionStartEventParameters.SessionId">
+            <summary>
+            Name of the sessionid parameter
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDSessionStartEvent.SessionStartEventParameters.TimeStamp">
+            <summary>
+            Name of the timestamp parameter
+            </summary>
+        </member>
+        <member name="T:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDSingleSignOnEvent.SingleSignOnEventParameters">
+            <summary>
+            The class which contains the names of the event parameters.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDSingleSignOnEvent.SingleSignOnEventParameters.IsEnabled">
+            <summary>
+            Name of the isenabled parameter
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDSingleSignOnEvent.SingleSignOnEventParameters.Timedout">
+            <summary>
+            Name of the timedout parameter
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDSingleSignOnEvent.SingleSignOnEventParameters.SSOSuccessful">
+            <summary>
+            Name of the ssosuccessful parameter
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDSingleSignOnEvent.SingleSignOnEventParameters.SSOSuccessfulTimeTaken">
+            <summary>
+            Name of the ssosuccesstimetaken parameter
+            </summary>
+        </member>
+        <member name="T:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDTelemetryEvent">
+            <summary>
+            Base class for the events to be sent to Telemetry
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDTelemetryEvent.eventName">
+            <summary>
+            Name of the event
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDTelemetryEvent.eventParameters">
+            <summary>
+            The list of parameters which describe the events
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDTelemetryEvent.activityId">
+            <summary>
+            Activity ID of the event(Will be unique for each USD bootup)
+            </summary>
+        </member>
+        <member name="M:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDTelemetryEvent.AddEventParameter(System.String,System.Object)">
+            <summary>
+            Add a parameter describing the event to the list
+            </summary>
+            <param name="name"><see cref="T:System.String"/> Name of the parameter</param>
+            <param name="value"><see cref="T:System.Object"/> Value of the parameter</param>
+        </member>
+        <member name="M:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDTelemetryEvent.UpdateAriaProperties(System.String)">
+            <summary>
+            Updates aria event properties. default values
+            </summary>
+            <param name="eventName">The eventname</param>
+        </member>
+        <member name="M:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDTelemetryEvent.UpdateAriaProperties(System.String,System.String)">
+            <summary>
+            Updates aria event properties.
+            </summary>
+            <param name="key">The event property name</param>
+            <param name="value">The event property value</param>
+        </member>
+        <member name="P:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDTelemetryEvent.EventParameters">
+            <summary>
+            Get the parameters describing the event
+            </summary>
+        </member>
+        <member name="P:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDTelemetryEvent.EventName">
+            <summary>
+            Get the name of the event
+            </summary>
+        </member>
+        <member name="P:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDTelemetryEvent.ActivityId">
+            <summary>
+            Get the activity ID
+            </summary>
+        </member>
+        <member name="T:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.Helpers.TelemetryConsumer">
+            <summary>
+            Consumers who use USD telemetry web resource to figure out the over riding tenant Id and collector Url
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.Helpers.TelemetryConsumer.USD">
+            <summary>
+            UnifiedServiceDesk.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.Helpers.TelemetryConsumer.OC">
+            <summary>
+            Omnichannel configuration.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.Helpers.AriaTelemetryUtility">
+            <summary>
+            Utility class to find the tenant Id and collector url from matching feature node available in telemetry web resource
+            </summary>
+        </member>
+        <member name="M:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.Helpers.AriaTelemetryUtility.InitializeClient(Microsoft.Xrm.Tooling.Connector.CrmServiceClient)">
+            <summary>
+            Initializes the crm service client
+            </summary>
+            <param name="client"></param>
+        </member>
+        <member name="M:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.Helpers.AriaTelemetryUtility.GetTelemetryParametersForOrg">
+            <summary>
+            Does crm server call to find the web resource content
+            </summary>
+            <returns>Content of telemetry web resource</returns>
+        </member>
+        <member name="P:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.Helpers.AriaTelemetryUtility.TelemetryMapperData">
+             <summary>
+            For the first time, this performs a crm server call to find the web resource content
+             </summary>
+        </member>
+        <member name="M:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.Helpers.AriaTelemetryUtility.ParseXmlAndInitializeTenantIdCollectorUrl(System.String,System.String,System.String@,System.String@,System.String,Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.Helpers.TelemetryConsumer)">
+            <summary>
+            Parses the tenantCollectorMapperContent (Xml) and assigns the tenantId and collectorUrl if there are any matches
+            </summary>
+            <param name="tenantCollectorMapperContent"></param>
+            <param name="orgname">The full crm org url </param>
+            <param name="tenantId">Output: Tenant Id if it is mentioned in web resource</param>
+            <param name="collectorUrl">Output: Collector Url if it is mentioned in web resource</param>
+            <param name="version">Version value that should be feature node</param>
+            <param name="consumer">The consumer.Refer enum TelemetryConsumer</param>
+            <returns>Returns true if there is matching feature node in web resource</returns>
+        </member>
+        <member name="M:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.Helpers.AriaTelemetryUtility.GetTenantIdAndCollectorDetailsFromWebResource(System.String,Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.Helpers.TelemetryConsumer,System.String@,System.String@,System.String)">
+            <summary>
+            Gets the tenantId and collector Url for given crm org.
+            </summary>
+            <param name="orgname">The full crm org url </param>
+            <param name="consumer">The consumer.Refer enum TelemetryConsumer</param>
+            <param name="tenantId">Output: Tenant Id if it is mentioned in web resource</param>
+            <param name="collectorUrl">Output: Collector Url if it is mentioned in web resource</param>
+            <returns>Returns true if there is matching feature node with specified version in web resource</returns>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.Helpers.USDFreezeTelemetryReason.USDFreezeAloneDetected">
+            <summary>
+            USD is not in responsive state.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.Helpers.USDFreezeTelemetryReason.USDFreezeRecovered">
+            <summary>
+            USD is not in responsive state.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.Helpers.USDFreezeTelemetryReason.USDWithIEFreezeDectected_WaitingForThreshold">
+            <summary>
+            USD and IE Freeze detected but IE not killed as Threshold not met.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.Helpers.USDFreezeTelemetryReason.IEFreezeAloneDetected_WaitingForThreshold">
+            <summary>
+            IE Freeze detected but not killed as Threshold not met.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.Helpers.USDFreezeTelemetryReason.USDWithIEFreezeDectected_KilledAfterThreshold">
+            <summary>
+            USD and IE Freeze detected and IE killed as Threshold met.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.Helpers.USDFreezeTelemetryReason.IEFreezeAloneDetected_KilledAfterThreshold">
+            <summary>
+            IE Freeze detected and killed as Threshold met.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.Helpers.CRMPageEventType.EntityNavigationStart">
+            <summary>
+            Entity navigation start event.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.Helpers.CRMPageEventType.EntityNavigationEnd">
+            <summary>
+            Entity navigation end event.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.Helpers.CRMPageEventType.RecoveryDenied">
+            <summary>
+            Event capturing Recovery prompt is denied by agent. 
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.Helpers.CRMPageEventType.RecoverySucceeded">
+            <summary>
+            Event capturing Recovery success. 
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.Helpers.CRMPageEventType.RecoveryFailed">
+            <summary>
+            Event capturing Recovery failed.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.Helpers.AriaUSDSettingsHelper">
+            <summary>
+            Helper class to initialize values for tenant Id and collector url of given crm org for USD.	
+            </summary>
+        </member>
+        <member name="M:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.Helpers.AriaUSDSettingsHelper.InitializeTelemetrySettingsForAria(System.String,System.String@,System.String@)">
+            <summary>
+            Finds the tenantId and collector URL that need to be used for given orgname	
+            </summary>
+            <param name="orgname">Full org url</param>
+            <param name="tenantId">Output: tenant Id</param>
+            <param name="collectorUrl">Output: Collector url</param>
+        </member>
+        <member name="M:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.Helpers.AriaUSDSettingsHelper.GetDefaultTenantIdAndCollectorDetails(System.String,System.String@,System.String@)">
+            <summary>
+            Gets the default values for USD telemetry.
+            </summary>
+            <param name="orgName">Crm org url</param>
+            <param name="tenantId">Output: tenant Id to use</param>
+            <param name="collectorUrl">Output: Collector Url to use</param>
+        </member>
+        <member name="T:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryEndpoint.TelemetryEndpointStatus">
+            <summary>
+            The status of the endpoint.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryEndpoint.HttpMethod">
+            <summary>
+            The types of HTTP methods.
+            </summary>
+        </member>
+        <member name="T:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryEndpoint.OnResponseInternal">
+            <summary>
+            Delegate for an HTTP response.
+            </summary>
+            <param name="isFaulted">Whether the call was a success.</param>
+            <param name="result">Text of the response. May be null if there's no response.</param>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryEndpoint.StatusLock">
+            <summary>
+            Status syncrhonization lock.
+            </summary>
+        </member>
+        <member name="E:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryEndpoint._endpointDiscovered">
+            <summary>
+            Event handler when the endpoint is discovered.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryEndpoint._endpointBaseAddress">
+            <summary>
+            Base address of the endpoint.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryEndpoint._retryDiscovery">
+            <summary>
+            Timer for retrying discovering.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryEndpoint._organizationUrl">
+            <summary>
+            Organization the endpoint is for.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryEndpoint.flushTasks">
+            <summary>
+            All the tasks are maintained in a list so that we can wait in the end for them to get finished
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryEndpoint._lock">
+            <summary>
+            Lock used to syncronize the flushtasks list
+            </summary>
+        </member>
+        <member name="M:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryEndpoint.SendRequest(System.Uri,System.String,Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryEndpoint.HttpMethod,System.String,Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryEndpoint.OnResponse,Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryEndpoint.OnResponseInternal)">
+            <summary>
+            Sends an HTTP request.
+            </summary>
+            <param name="baseAddress">Base address to send the request to.</param>
+            <param name="relativeUrl">Relative url to send the request to.</param>
+            <param name="method">HTTP request method.</param>
+            <param name="events">The telemetry events to send as post data.</param>
+            <param name="onResponse">On response callback.</param>
+        </member>
+        <member name="M:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryEndpoint.SendRequestInternal(System.String,Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryEndpoint.HttpMethod,System.String,System.Net.Http.HttpClient,System.Action{System.Boolean,System.Func{System.String}})">
+            <summary>
+            Sends an HTTP request.
+            </summary>
+            <param name="relativeUrl">Relative url to send the request to.</param>
+            <param name="method">HTTP request method.</param>
+            <param name="item">The telemetry events to send as post data.</param>
+            <param name="request">The request to send.</param>
+            <param name="onRequestResponse">On response callback.</param>
+        </member>
+        <member name="M:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryEndpoint.ReportEvents(System.String,Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryEndpoint.OnResponse)">
+            <summary>
+            Reports events.
+            </summary>
+            <param name="events">The events to report.</param>
+            <param name="onResponse">Callback when there's a response from the endpoint.</param>
+        </member>
+        <member name="M:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryEndpoint.OnGetEndpointUrl(System.Boolean,System.String)">
+            <summary>
+            Handler when the endpoint url is discovered (or there's a fault).
+            </summary>
+            <param name="isFaulted">Whether there was a fault.</param>
+            <param name="result">The result of the discovery.</param>
+        </member>
+        <member name="M:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryEndpoint.SendGetRequest(System.Uri,System.String,Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryEndpoint.OnResponseInternal)">
+            <summary>
+            Sends a GET request.
+            </summary>
+            <param name="baseAddress">Base address to send the request to.</param>
+            <param name="relativeUrl">Relative url to send the request to.</param>
+            <param name="onResponse">On response callback.</param>
+        </member>
+        <member name="M:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryEndpoint.SendPostRequest(System.Uri,System.String,System.String,Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryEndpoint.OnResponse)">
+            <summary>
+            Sends a POST request.
+            </summary>
+            <param name="baseAddress">Base address to send the request to.</param>
+            <param name="relativeUrl">Relative url to send the request to.</param>
+            <param name="events">The telemetry events to send as post data.</param>
+            <param name="onResponse">On response callback.</param>
+        </member>
+        <member name="M:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryEndpoint.RetryDiscovery(System.Object)">
+            <summary>
+            Tries again to discover the endpoint.
+            </summary>
+            <param name="unused">Probably null, but it doesn't matter.</param>
+        </member>
+        <member name="M:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryEndpoint.DiscoverEndpoint">
+            <summary>
+            Discovers the endpoint.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryEndpoint.DiscoverEndpointThenReportEvents(System.String,Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryEndpoint.OnResponse)">
+            <summary>
+            Discoveres the endpoint and then reports events to it.
+            </summary>
+            <param name="events">The events to report.</param>
+            <param name="onResponse">Callback when there's a response from the endpoint.</param>
+        </member>
+        <member name="M:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryEndpoint.ReportEventsWhenEndpointDiscovered(System.String,Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryEndpoint.OnResponse)">
+            <summary>
+            Reports events when the endpoitn is discovered.
+            </summary>
+            <param name="events">The events to report.</param>
+            <param name="onResponse">Callback when there's a response from the endpoint.</param>
+        </member>
+        <member name="M:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryEndpoint.Dispose">
+            <summary>
+            Disposes the endpoint.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryEndpoint.Dispose(System.Boolean)">
+            <summary>
+            Disposes the endpoint.
+            </summary>
+            <param name="disposing">Whether dispose was called.</param>
+        </member>
+        <member name="T:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryReporter">
+            <summary>
+            Class to report USD telemetry data to CMA pipeline.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryReporter.#ctor">
+            <summary>
+            Prevent anyone from outside to instantiate this class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryReporter.Instance">
+            <summary>
+            Returns an instance of TelemetryReporter class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryReporter.EventsReportQueue">
+            <summary>
+             Queue maintaining the events to be reported
+            </summary>
+        </member>
+        <member name="M:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryReporter.Initialize(System.Guid,System.Guid,System.String,System.Guid,System.String,System.String)">
+            <summary>
+            Performs initialization tasks for the telemetry.
+            Sets the default dimensions for the events and starts the discovery process
+            for the appropritate telemetry endpoint.
+            </summary>
+            <param name="orgId">Unique id of the org.</param>
+            <param name="userId">user id</param>
+            <param name="orgName">Name of the org. For online it should be like contoso.crm.dynamics.com</param>
+        </member>
+        <member name="M:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryReporter.Flush">
+            <summary>
+            Immediately flushes all the events to telemetry present the in the queue
+            </summary>
+        </member>
+        <member name="M:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryReporter.ReportEvents(Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDTelemetryEvent[])">
+            <summary>
+            Pass the list of USDTelemetryEvents to be reported
+            </summary>
+            <param name="eventsToReport"></param>
+        </member>
+        <member name="M:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryReporter.ReportEventImmediate(Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDTelemetryEvent)">
+            <summary>
+            Send the telemetry event that you want to report immediately bypassing the queue
+            </summary>
+            <param name="eventToReport"></param>
+        </member>
+        <member name="M:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryReporter.GetEventsJsonObject(Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDTelemetryEvent[])">
+            <summary>
+            Returns a json object of list of all the telemetry events passed to the function
+            </summary>
+            <param name="events"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryReporter.QueueEvent(Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDTelemetryEvent)">
+            <summary>
+            Takes an event an adds it to the queue,
+            when queue size exceeds a threshold, all the events are pushed to the telemetry
+            </summary>
+            <param name="events"></param>
+        </member>
+        <member name="M:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryReporter.FlushTelemetryEvents(System.Collections.Generic.List{Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDTelemetryEvent})">
+            <summary>
+            Pushes all the events to the telemetry by forming a json object
+            </summary>
+            <param name="_eventsPushList"></param>
+        </member>
+        <member name="M:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.TelemetryReporter.Dispose(System.Boolean)">
+            <summary>
+            Function is used to dispose the instance and push the remaining events at the closing of USD
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDEdgeLongRunningEvent.USDEdgeLongRunningEventParameters">
+            <summary>
+            The class which contains the names of the event parameters.
+            </summary>
+        </member>
+        <member name="F:Microsoft.Crm.UnifiedServiceDesk.Core.Telemetry.USDEdgeLongRunningEvent.USDEdgeLongRunningEventParameters.Url">
+            <summary>
+            Name of the Url parameter
+            </summary>
+        </member>
+    </members>
+</doc>
